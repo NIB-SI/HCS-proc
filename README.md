@@ -441,3 +441,26 @@ Run:
 `python mmd_emd_mah_drc.py`
 
 MMD, EMD and Mahalanobis plots
+
+# ALTERNATIVE PROCESSING
+
+### Selection of features based on high variability and/or low activity
+
+Start from EMD scores from files:
+PATH/TO/feature_selection/results/EMD_scores/EMD_conc_2.5_97.5_well.txt - treatment
+PATH/TO/feature_selection/results/EMD_scores/EMD_c11_2.5_97.5_well.txt - control
+
+Modify file **plots_emd_high_low.py**:
+
+    treatment_file = 'PATH/TO/feature_selection/results/EMD_scores/EMD_conc_2.5_97.5_well.txt'
+    control_file = 'PATH/TO//feature_selection/results/EMD_scores/EMD_c11_2.5_97.5_well.txt'
+    output_dir = 'PATH/TO/feature_selection_high_low/results/EMD_scores'
+
+### Z-score standardization
+
+Start from per cell aggregated file:
+PATH/TO/main/results/cell_ID_pooled_median.txt
+
+Modify file **standardization_Z.py**:
+
+    file_path = 'PATH/TO/main/results/cell_ID_pooled_median.txt'
