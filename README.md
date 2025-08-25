@@ -42,11 +42,9 @@ Modify the **2024-07-20_QC.cpproj**
 
 To create **image_ranges.txt**; modify in **image_ranges.sh**:
 
-`IMAGE_DIR="/PATH/TO/IMAGES/"`
-
-`NUM_INSTANCES=20  # Number of parallel instances`
-
-`OUTPUT_FILE="/PATH/TO/IMAGES/preprocessing/image_ranges_qc.txt"`
+    IMAGE_DIR="/PATH/TO/IMAGES/"
+    NUM_INSTANCES=20  # Number of parallel instances
+    OUTPUT_FILE="/PATH/TO/IMAGES/preprocessing/image_ranges_qc.txt"
 
 Run:
 `./image_ranges.sh`
@@ -54,13 +52,10 @@ Run:
 In Quality control nextflow file QC **nf_qc.nf** file.
 Modify the:
 
-`params.IMAGE_DIR="/PATH/TO/IMAGES/"`
-
-`params.OUTPUT_DIR="/PATH/TO/preprocessing/qc"`
-
-`params.PIPELINE = "/PATH/TO/preprocessing/2024-07-20_QC.cpproj"`
-
-`params.IMAGE_RANGES = "/PATH/TO/preprocessing/image_ranges_qc.txt"`
+    params.IMAGE_DIR="/PATH/TO/IMAGES/"
+    params.OUTPUT_DIR="/PATH/TO/preprocessing/qc"
+    params.PIPELINE = "/PATH/TO/preprocessing/2024-07-20_QC.cpproj"
+    params.IMAGE_RANGES = "/PATH/TO/preprocessing/image_ranges_qc.txt"
 
 Move to the installed nextflow folder with modified **nf_qc.nf** file.
 
