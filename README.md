@@ -42,8 +42,8 @@ Modify the **2024-07-20_QC.cpproj**
 
 To create **image_ranges.txt**; modify in **image_ranges.sh**:
 
-    IMAGE_DIR = "/PATH/TO/IMAGES/"
-    NUM_INSTANCES = 20  # Number of parallel instances
+    IMAGE_DIR="/PATH/TO/IMAGES/"
+    NUM_INSTANCES=20  # Number of parallel instances
     OUTPUT_FILE="/PATH/TO/IMAGES/preprocessing/image_ranges_qc.txt"
 
 Run:
@@ -126,6 +126,7 @@ make new image ranges:
 modify the script **image_ranges.sh** in main_cp folder:
 
     IMAGE_DIR="/PATH/TO/IMAGES/"
+    NUM_INSTANCES=20  # Number of parallel instances
     OUTPUT_FILE="/PATH/TO/main/image_ranges_main.txt"
 
 Run:
