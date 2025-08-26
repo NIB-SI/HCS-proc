@@ -28,7 +28,7 @@ Activate environment:
 Run:
 `cellprofiler`
 
-Modify the **2024-07-20_QC.cpproj**
+Modify the **2024-07-20_QC.cpproj** in CellProfiler GUI:
 
 	Experiment name: "name"
 	Database name: "name"
