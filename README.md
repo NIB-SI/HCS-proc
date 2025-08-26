@@ -120,10 +120,10 @@ Run:
 
 ## MAIN FEATURE EXTRACTION IN CELLPROFILER
 
-folder for scripts: /PATH/TO/main_cp/scripts
+folder for scripts: /PATH/TO/main/scripts
 
 make new image ranges:
-modify the script **image_ranges.sh** in main_cp folder:
+modify the script **image_ranges.sh** in main folder:
 
     IMAGE_DIR="/PATH/TO/IMAGES/"
     NUM_INSTANCES=20  # Number of parallel instances
