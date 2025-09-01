@@ -464,3 +464,14 @@ PATH/TO/main/results/cell_ID_pooled_median.txt
 Modify file **standardization_Z.py**:
 
     file_path = 'PATH/TO/main/results/cell_ID_pooled_median.txt'
+
+### Violin Plots per Feature
+
+Input files: any aggregated + standardized files; for example:
+clean_trimmed_features_all_days_trimmed_trimmed_features.txt
+cell_ID_pooled_median_row_plate_standardization.txt
+any subset
+
+Modify file **violin_plots_per_feature.py**:
+
+    file_path = '/PATH/TO/feature_selection/results/trimmed_2/clean_trimmed_features_all_days_trimmed_trimmed_features_cid.txt'
