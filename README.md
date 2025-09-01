@@ -468,8 +468,11 @@ Modify file **standardization_Z.py**:
 ### Violin Plots per Feature
 
 Input files: any aggregated + standardized files; for example:
+
 clean_trimmed_features_all_days_trimmed_trimmed_features.txt
+
 cell_ID_pooled_median_row_plate_standardization.txt
+
 any subset
 
 Modify file **violin_plots_per_feature.py**:
