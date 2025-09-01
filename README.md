@@ -276,7 +276,7 @@ Activate environment:
 Run:
 `plots_emd_model_drc.py`
 
-Using calculated EMD scores of treatment vs. control → we fit different drc models → select feature if linear slop isn't negative + constant model isn't the best fit
+Using calculated EMD scores of treatment vs. control → we fit different drc models → select feature if linear slope isn't negative + constant model isn't the best fit
 
 Run:
 `python select_features.py`
