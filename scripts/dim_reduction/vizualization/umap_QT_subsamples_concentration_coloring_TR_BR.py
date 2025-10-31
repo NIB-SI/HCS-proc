@@ -14,6 +14,25 @@ import configparser
 config = configparser.ConfigParser()
 config.read('config.ini')
 
+# Get experimental parameters from config
+tech_replicas = config['dim_reduction_visualization']['tech_replicas'].split(',')
+bioreps = config['dim_reduction_visualization']['bioreps'].split(',')
+tech_replica_color_list = config['dim_reduction_visualization']['tech_replica_colors'].split(',')
+biorep_color_list = config['dim_reduction_visualization']['biorep_colors'].split(',')
+
+# Build color dictionaries
+tech_replica_colors = {tr: tech_replica_color_list[i] for i, tr in enumerate(tech_replicas)}
+biorep_colors = {br: biorep_color_list[i] for i, br in enumerate(bioreps)}
+
+# Get optional tech replica mapping
+tech_replica_mapping_str = config.get('dim_reduction_visualization', 'tech_replica_mapping', fallback='')
+tech_replica_mapping = {}
+if tech_replica_mapping_str:
+    for mapping in tech_replica_mapping_str.split(','):
+        if ':' in mapping:
+            old, new = mapping.split(':')
+            tech_replica_mapping[old] = new
+
 # Get paths from config
 base_path = config['dim_reduction_visualization']['base_path']
 subsets_filtered_dir_rel = config['dim_reduction_visualization']['subsets_filtered_dir']
@@ -27,20 +46,6 @@ output_directory = os.path.join(base_path, umap_qt_coloring_br_tr_dir_rel)
 
 # Create output directory if it doesn't exist
 os.makedirs(output_directory, exist_ok=True)
-
-# Define color palettes for Tech_replica and Metadata_Biorep
-tech_replica_colors = {
-    'B': '#2c7bb6',
-    'C': '#fdae61',
-    'D': '#d7191c'
-}
-
-biorep_colors = {
-    'BR1': '#2c7bb6',
-    'BR2': '#abd9e9',
-    'BR3': '#fdae61',
-    'BR4': '#d7191c'
-}
 
 # Function to create UMAP plots
 def create_umap_plots(plot_data, color_dict, metadata_column, base_file_name):
@@ -134,8 +139,8 @@ for subsample_file in subsample_files:
     
     # Prepare the plot data
     plot_data = pd.DataFrame(umap_embedding, columns=['UMAP-1', 'UMAP-2'])
-    # Group E with B, F with C, and G with D
-    plot_data['Tech_replica'] = metadata['Tech_replica'].replace({'E': 'B', 'F': 'C', 'G': 'D'})
+    # Apply tech replica mapping if it exists
+    plot_data['Tech_replica'] = metadata['Tech_replica'].replace(tech_replica_mapping) if tech_replica_mapping else metadata['Tech_replica']
     plot_data['Metadata_Biorep'] = metadata['Metadata_Biorep']
     
     # Determine the base file name without extension and directory

@@ -33,7 +33,7 @@ features_to_exclude = [
 
 # Create the report file
 os.makedirs(output_dir, exist_ok=True)
-report_path = os.path.join(output_dir, 'feature_filtering_report.txt')
+report_path = os.path.join(output_dir, 'feature_filtering_report.md')
 
 # Initialize counters for summary statistics as global variables
 total_files_processed = 0
@@ -147,6 +147,7 @@ with open(report_path, 'w') as report_file:
     
     # Walk through the directory structure
     for root, dirs, files in os.walk(input_dir):
+        files = sorted(files)
         # Get the relative path to maintain directory structure
         rel_root = os.path.relpath(root, input_dir)
         

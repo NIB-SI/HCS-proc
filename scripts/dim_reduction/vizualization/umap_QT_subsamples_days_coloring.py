@@ -14,6 +14,11 @@ import configparser
 config = configparser.ConfigParser()
 config.read('config.ini')
 
+# Get experimental parameters from config
+days = config['dim_reduction_visualization']['days'].split(',')
+day_color_list = config['dim_reduction_visualization']['day_colors'].split(',')
+day_colors = {day: day_color_list[i] for i, day in enumerate(days)}
+
 # Get paths from config
 base_path = config['dim_reduction_visualization']['base_path']
 subsets_days_per_conc_filtered_dir_rel = config['dim_reduction_visualization']['subsets_days_per_conc_filtered_dir']
@@ -27,14 +32,6 @@ output_directory = os.path.join(base_path, umap_qt_days_coloring_dir_rel)
 
 # Create output directory if it doesn't exist
 os.makedirs(output_directory, exist_ok=True)
-
-# Define the color palette for days
-day_colors = {
-    'D1': '#2c7bb6',
-    'D5': '#abd9e9',
-    'D7': '#fdae61',
-    'D9': '#d7191c'
-}
 
 # List all the subsample files
 subsample_files = [f for f in os.listdir(subsamples_dir) if f.endswith('.txt') and f != "feature_filtering_report.txt"]
@@ -78,7 +75,7 @@ for subsample_file in subsample_files:
         data=plot_data,
         palette=day_colors,
         s=9,
-        hue_order=['D1', 'D5', 'D7', 'D9'],
+        hue_order=days,
         #legend='brief'
     )
     plt.title('UMAP plot colored by Day')
@@ -97,7 +94,7 @@ for subsample_file in subsample_files:
     plt.close()
     
     # Loop through the specified days and create a plot for each
-    for day in ['D1', 'D5', 'D7', 'D9']:
+    for day in days:
         plot_data['Color'] = np.where(plot_data['Day'] == day, f'Day {day}', 'Other')
         plot_data['Size'] = np.where(plot_data['Day'] == day, 20, 9)
         

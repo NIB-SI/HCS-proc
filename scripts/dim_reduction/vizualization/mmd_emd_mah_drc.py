@@ -14,6 +14,11 @@ import configparser
 config = configparser.ConfigParser()
 config.read('config.ini')
 
+# Get experimental parameters from config
+control_conc = int(config['dim_reduction_visualization']['control_concentration'])
+concentrations = [int(c) for c in config['dim_reduction_visualization']['concentrations'].split(',')]
+days = config['dim_reduction_visualization']['days'].split(',')
+
 # Get paths from config
 base_path = config['dim_reduction_visualization']['base_path']
 subsets_min_count_filtered_dir_rel = config['dim_reduction_visualization']['subsets_min_count_filtered_dir']
@@ -106,7 +111,7 @@ def process_file(file_path):
     scaler = MinMaxScaler()
     data[feature_cols] = scaler.fit_transform(data[feature_cols])
     
-    comparisons = [(11, 10), (11, 9), (11, 8), (11, 7), (11, 6), (11, 5), (11, 4), (11, 3), (11, 2)]
+    comparisons = [(control_conc, c) for c in sorted(concentrations, reverse=True) if c != control_conc]
     results = []
     
     for (a, b) in comparisons:
@@ -181,12 +186,8 @@ colors = ['#80c0c0', '#333333', '#777777']
 # Full color palette for all_conditions plots - keeping 4 colors as requested
 all_conditions_colors = ['#80c0c0', '#008080', '#777777', '#333333']
 
-day_conversion = {
-    'D1': 'Day 1',
-    'D5': 'Day 5',
-    'D7': 'Day 7',
-    'D9': 'Day 9'
-}
+# Create day conversion dict from config days
+day_conversion = {day: f'Day {day[1:]}' for day in days}
 
 metrics = ['MMD_Score', 'Mahalanobis_Score', 'EMD_Score']
 

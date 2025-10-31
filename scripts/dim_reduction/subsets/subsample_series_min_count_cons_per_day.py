@@ -6,6 +6,9 @@ import configparser
 config = configparser.ConfigParser()
 config.read('config.ini')
 
+# Get experimental parameters from config
+days_to_include = config['dim_reduction_subsets']['days_to_include'].split(',')
+
 # Get paths from config
 base_path = config['dim_reduction_subsets']['base_path']
 final_features_file_rel = config['dim_reduction_subsets']['final_features_file']
@@ -23,9 +26,6 @@ data = pd.read_csv(file_path, sep='\t')
 
 # Ensure 'Concentration' is of string type
 data['Concentration'] = data['Concentration'].astype(str)
-
-# Define the days to be included in subsamples
-days_to_include = ['D1', 'D5', 'D7', 'D9']
 
 # Function to create and save subsamples with equal counts
 def create_equal_subsamples(data, days, concentrations, exclude_concentration=None):

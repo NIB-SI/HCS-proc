@@ -237,7 +237,17 @@ folder for scripts: /PATH/TO/feature_selection/scripts
     trimmed_dir = feature_selection/results/trimmed
     trimmed_2_dir = feature_selection/results/trimmed_2
 
-Change the base_path + double check if the input files are where they should be.
+    # Experimental parameters
+    concentrations = 2,3,4,5,6,7,8,9,10,11
+    control_concentration = 11
+    days = D1,D5,D7,D9
+    bioreps = BR1,BR2,BR3,BR4
+    
+    # Feature selection criteria
+    # Use comma-separated days for DRC feature selection (e.g., D1,D5,D7,D9 or D5,D7) - specifically meaning, DRC logic will check all the selected days, the feature MUST be accepted on all the days to be retained; more days selected = more strict.
+    selection_days = D1,D5,D7,D9
+
+Change the base_path + double check if the input files are where they should be and the experimental parameters are correct.
 
 ## EMD CONTROLS
 
@@ -274,7 +284,7 @@ Activate environment:
 `conda activate utility_tools`
 
 Run:
-`plots_emd_model_drc.py`
+`python plots_emd_model_drc.py`
 
 Using calculated EMD scores of treatment vs. control → we fit different drc models → select feature if linear slope isn't negative + constant model isn't the best fit
 
@@ -316,7 +326,7 @@ Run:
 We parse the created lists to only one feature per cluster in a new list (which features to include)
 
 Run:
-`trimming_value_include_batch_v2_cid.py`
+`python trimming_value_include_batch_v2_cid.py`
 
 Same as previous step, uses lists we created with **parsing_clusters.py** and trims + filters the standardized data → saved into subsets by FS based on days
 
@@ -329,7 +339,7 @@ Same as previous step, uses lists we created with **parsing_clusters.py** and tr
     [dim_reduction_subsets]
     base_path = /PATH/TO/
     # Input file - final output from feature selection
-    final_features_file = feature_selection/results/trimmed_2/clean_trimmed_features_all_days_trimmed_trimmed_features.txt
+    final_features_file = feature_selection/results/trimmed_2/clean_trimmed_features_D1_D5_D7_D9_trimmed_trimmed_features.txt
     # Output directories for subsets
     subsets_base_dir = dim_reduction/results/subsets
     subsets_all_days_fs_dir = dim_reduction/results/subsets/all_days_fs
@@ -337,8 +347,11 @@ Same as previous step, uses lists we created with **parsing_clusters.py** and tr
     subsets_min_count_dir = dim_reduction/results/subsets/all_days_fs/min_count
     subsets_filtered_dir = dim_reduction/results/subsets/all_days_fs_filtered
     counts_output_dir = dim_reduction/results
+       
+    # Experimental parameters
+    days_to_include = D1,D5,D7,D9
 
-Change the base_path + double check if the input files are where they should be.
+Change the base_path + double check if the input files are where they should be and the experimental parameters are correct.
 
 ### NUMBER OF CELLS PER BIOLOGICAL REPLICA AND OTHER
 
@@ -380,8 +393,6 @@ Activate environment:
 Run:
 `python filtering_subsets.py`
 
-!! Remove from the /all_days_fs_filtered **feature_filtering_report.txt** because of further processing. !!
-
 ## VISUALIZATION
 
 **config.ini** setup:
@@ -405,8 +416,28 @@ Run:
     # Feature visualization
     sample_features_file = dim_reduction/results/subsets/all_days_fs_filtered/subsample_5k_D5.txt
     sample_embedding_file = dim_reduction/results/umap/QT/subsample_5k_D5_umap_embedding_QuantileTransformer.npy
+        
+    # Experimental parameters
+    concentrations = 2,3,4,5,6,7,8,9,10,11
+    control_concentration = 11
+    days = D1,D5,D7,D9
+    bioreps = BR1,BR2,BR3,BR4
+    tech_replicas = B,C,D
+    
+    # Color palettes (hex codes, comma-separated)
+    # Colors for days (4 colors for D1,D5,D7,D9)
+    day_colors = #2c7bb6,#abd9e9,#fdae61,#d7191c
+    # Colors for bioreps (4 colors for BR1,BR2,BR3,BR4)
+    biorep_colors = #2c7bb6,#abd9e9,#fdae61,#d7191c
+    # Colors for tech replicas (3 colors for B,C,D)
+    tech_replica_colors = #2c7bb6,#fdae61,#d7191c
+    
+    # Optional: Tech replica mapping (maps alternative names to standard names, if wells were changed)
+    # Format: old_name:new_name (e.g., E:B means map E to B)
+    # Leave empty if not needed
+    tech_replica_mapping = E:B,F:C,G:D
 
-Change the base_path + double check if the input files are where they should be.
+Change the base_path + double check if the input files are where they should be and the experimental parameters are correct.
 
 ### UMAP visualisation
 
