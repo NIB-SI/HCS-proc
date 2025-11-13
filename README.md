@@ -247,6 +247,15 @@ folder for scripts: /PATH/TO/feature_selection/scripts
     # Use comma-separated days for DRC feature selection (e.g., D1,D5,D7,D9 or D5,D7) - specifically meaning, DRC logic will check all the selected days, the feature MUST be accepted on all the days to be retained; more days selected = more strict.
     selection_days = D1,D5,D7,D9
 
+    # Experiment structure - defines which biological replicates exist for each day
+    [experiment_structure]
+    # List of days must match the days parameter above
+    # For each day, specify which biological replicates are available
+    D1_replicates = BR1,BR2,BR3,BR4
+    D5_replicates = BR1,BR2,BR3,BR4
+    D7_replicates = BR1,BR2,BR3,BR4
+    D9_replicates = BR1,BR2,BR3,BR4
+
 Change the base_path + double check if the input files are where they should be and the experimental parameters are correct.
 
 ## EMD CONTROLS
