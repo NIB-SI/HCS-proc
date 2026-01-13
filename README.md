@@ -4,7 +4,7 @@ Data processing pipeline for High-Content Screening using CellProfiler data.
 
 This set of scripts was used for *doi:xxx*
 
-Training set and partial results are available at: *doi:xxx*
+Training set and partial results are available at: *https://doi.org/10.5281/zenodo.17951793*
 
 Follow the exact sequence of steps to perform the full analysis.
 
