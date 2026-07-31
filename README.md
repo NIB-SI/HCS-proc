@@ -2,11 +2,33 @@
 
 Data processing pipeline for High-Content Screening using CellProfiler data.
 
-This set of scripts was used for *doi:xxx*
+## Citation
 
-Training set and partial results are available at: *https://doi.org/10.5281/zenodo.17951793*
+This set of scripts was used for:
 
-Follow the exact sequence of steps to perform the full analysis.
+> Tome, M.; Jozef, B.; Mosimann, S. L.; Kosnik, M.; Schirmer, K.; Županič, A.
+> **A High-Content Imaging Pipeline to Investigate Subcytotoxic Effects in RTgill-W1 Cells.**
+> *Environmental Science & Technology*, 2026.
+> [https://doi.org/10.1021/acs.est.5c18316](https://doi.org/10.1021/acs.est.5c18316)
+
+If you use this pipeline, please cite the article above. A `CITATION.cff` file is
+included, so GitHub's *Cite this repository* button gives the same reference in BibTeX
+or APA form.
+
+## Data
+
+Raw microscopy images, CellProfiler-extracted features, pipeline files and processed
+data (Tebuthiuron exposure of RTgill-W1 cells) are archived on Zenodo under CC-BY-4.0
+(~121 GB):
+
+> [https://doi.org/10.5281/zenodo.17951792](https://doi.org/10.5281/zenodo.17951792)
+
+That is the concept DOI and always resolves to the newest version; the version used in
+the article is [10.5281/zenodo.17951793](https://doi.org/10.5281/zenodo.17951793).
+
+## How to use this repository
+
+Follow the exact sequence of steps below to perform the full analysis.
 
 ![Day % results](./files/Fig_3_v1_small.png)
 
@@ -91,8 +113,12 @@ In case of error while opening **.properties** file, try to load the **.properti
 in CellProfiler-Analyst GUI open each classifier, load + **Score All** the following Classifier Models and save each table as a .csv file:
 
     artefacts_i6.model → tagged_artefacts.csv
-    empty_i3.model → tagged_empty.csv
+    empty_i5.model → tagged_empty.csv
     oversaturated_i2.model → tagged_oversaturated.csv
+
+A fourth model, **unfocused_i6.model**, is included in `files/qc/classifier_models/` but
+was *not* applied in the published analysis. Score it only if out-of-focus images are a
+problem in your own dataset.
 
 Exit the Classifier → from Main menu of the CellProfiler-Analyst GUI → Table view → File → Load table from database → "name"Per_Image → File → Save table to CSV → save as "imageID.csv"
 
@@ -145,7 +171,7 @@ Activate environment:
 `conda activate nextflow`
 
 Run:
-`nextflow run 2024-07-24_the_main_nocut.nf -bg -with-conda`
+`nextflow run main.nf -bg -with-conda`
 
 ## PER CELL POOLING
 

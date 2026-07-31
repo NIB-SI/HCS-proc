@@ -10,7 +10,7 @@ params.IMAGE_RANGES = "/PATH/TO/preprocessing/image_ranges_qc.txt"
 process run_cellprofiler {
     maxForks 20  // Adjust based on your memory test
     cache 'true'
-	conda "/DKEC/users/mihat/.conda/envs/cp4"
+	conda "/PATH/TO/envs/cp4"
 
     input:
         tuple val(first_image), val(last_image)
