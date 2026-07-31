@@ -10,6 +10,8 @@ This set of scripts was used for:
 > **A High-Content Imaging Pipeline to Investigate Subcytotoxic Effects in RTgill-W1 Cells.**
 > *Environmental Science & Technology*, 2026.
 > [https://doi.org/10.1021/acs.est.5c18316](https://doi.org/10.1021/acs.est.5c18316)
+>
+> M.T. and B.J. contributed equally to this work.
 
 If you use this pipeline, please cite the article above. A `CITATION.cff` file is
 included, so GitHub's *Cite this repository* button gives the same reference in BibTeX
