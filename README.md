@@ -268,6 +268,12 @@ folder for scripts: /PATH/TO/feature_selection/scripts
     # Experimental parameters
     concentrations = 2,3,4,5,6,7,8,9,10,11
     control_concentration = 11
+    # Concentrations excluded from DRC model fitting (comma-separated; leave empty for none).
+    # The highest exposure concentration is left out so that concentration-response
+    # detection stays within sub-cytotoxic exposure levels. EMD scores are still computed
+    # for every pair; only the curve fitting skips these. With the values above this fits
+    # the eight pairs 11v10, 11v9, ... 11v3.
+    drc_excluded_concentrations = 2
     days = D1,D5,D7,D9
     bioreps = BR1,BR2,BR3,BR4
 
@@ -331,6 +337,8 @@ Run:
 Using calculated EMD scores of treatment vs. control → we fit different drc models → select feature if linear slope isn't negative + constant model isn't the best fit
 
 Models fitted per feature and day: Brain-Cousens (BC4, BC5), four-parameter log-logistic (LL4), four-parameter Weibull (WB1.4), linear (Lin) and constant (Con). AIC/BIC per model are written to `model_fit_results.txt` in **emd_scores_drc_dir**, alongside one PNG per day and grid page (`Day_<day>_part_<n>.png`); how many plots share a page is set by **drc_grid_size**.
+
+The curves are fitted to the pairs 11v10, 11v9, ... 11v3 — the highest exposure concentration is excluded via **drc_excluded_concentrations** so that concentration-response detection stays within sub-cytotoxic exposure levels. The EMD scores from the previous step still cover every pair; only the fitting skips the excluded ones. The script prints the pairs it is fitting when it starts.
 
 Run:
 `python select_features.py`
