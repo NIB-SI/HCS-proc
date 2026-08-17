@@ -32,7 +32,9 @@ the article is [10.5281/zenodo.17951793](https://doi.org/10.5281/zenodo.17951793
 
 Follow the exact sequence of steps below to perform the full analysis.
 
-![Day % results](./files/Fig_3_v1_small.png)
+![Day 5 results](./files/Fig_2_small.png)
+
+*Figure 2 of the article.*
 
 # MAIN FEATURE EXTRACTION
 
@@ -326,7 +328,9 @@ Pair-wise comparison of all biological replicas against all treatments and all c
 
 ## FEATURE SELECTION BASED ON DRC
 
-![DRC FS](./files/Fig_4_v1.png)
+![DRC FS](./files/Fig_4.png)
+
+*Figure 4 of the article.*
 
 Activate environment:
 `conda activate utility_tools`
