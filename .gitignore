@@ -213,6 +213,9 @@ PROJECT.md
 NEXT_SESSION_PROMPT.md
 proof.pdf
 .log/
+# Local copy of the published article. Open access under CC-BY-4.0 and permanently
+# available at the DOI in the README, so it is not worth 14.5 MB of repository history.
+acs.est.5c18316.pdf
 
 # Staging area for server-side scripts/figures awaiting integration, and the
 # holding pen for superseded material. Both are local-only and can be large.
