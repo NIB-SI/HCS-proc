@@ -270,7 +270,12 @@ folder for scripts: /PATH/TO/feature_selection/scripts
     control_concentration = 11
     days = D1,D5,D7,D9
     bioreps = BR1,BR2,BR3,BR4
-    
+
+    # Plotting
+    # Plots per row/column in the DRC model-fit images (1 = one plot per image, 5 = 5x5 grid).
+    # Each subplot is 8x8 inches, so the figure scales with this value.
+    drc_grid_size = 3
+
     # Feature selection criteria
     # Use comma-separated days for DRC feature selection (e.g., D1,D5,D7,D9 or D5,D7) - specifically meaning, DRC logic will check all the selected days, the feature MUST be accepted on all the days to be retained; more days selected = more strict.
     selection_days = D1,D5,D7,D9
@@ -324,6 +329,8 @@ Run:
 `python plots_emd_model_drc.py`
 
 Using calculated EMD scores of treatment vs. control → we fit different drc models → select feature if linear slope isn't negative + constant model isn't the best fit
+
+Models fitted per feature and day: Brain-Cousens (BC4, BC5), four-parameter log-logistic (LL4), four-parameter Weibull (WB1.4), linear (Lin) and constant (Con). AIC/BIC per model are written to `model_fit_results.txt` in **emd_scores_drc_dir**, alongside one PNG per day and grid page (`Day_<day>_part_<n>.png`); how many plots share a page is set by **drc_grid_size**.
 
 Run:
 `python select_features.py`
