@@ -11,8 +11,14 @@
 #             Texture, Correlation, Number
 # organelle : Nuclei, Lysosomes, Mitochondria, Other
 feature	category	organelle
+counts_Cells	Counts	Other
+counts_Cytoplasm	Counts	Other
+counts_FilteredNuclei	Counts	Nuclei
 counts_RelateLysoCell	Counts	Lysosomes
 counts_RelateMitoCell	Counts	Mitochondria
+rp_norm_AreaShape_Area_Cells	AreaShape	Other
+rp_norm_AreaShape_Area_Cytoplasm	AreaShape	Other
+rp_norm_AreaShape_Area_FilteredNuclei	AreaShape	Nuclei
 rp_norm_AreaShape_Area_RelateLysoCell	AreaShape	Lysosomes
 rp_norm_AreaShape_Area_RelateMitoCell	AreaShape	Mitochondria
 rp_norm_AreaShape_BoundingBoxArea_Cells	AreaShape	Other

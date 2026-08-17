@@ -388,6 +388,12 @@ folder for scripts: /PATH/TO/categorization/scripts
 
 Summarizes which kinds of measurement, on which organelle, survived feature selection.
 
+![Feature categories](./files/feature_categories_barplot.png)
+
+*Selected features by organelle and measurement type, as produced by the scripts below.
+Generated from the feature-selection output, before the missing-data filter applied when
+making subsets, so the totals are slightly higher than those quoted in the article.*
+
 **config.ini** setup:
 
     [categorization]
