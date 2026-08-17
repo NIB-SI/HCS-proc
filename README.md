@@ -632,14 +632,39 @@ Modify file **standardization_Z.py**:
 
 ### Violin Plots per Feature
 
-Input files: any aggregated + standardized files; for example:
+Per-feature distributions across all concentrations, one plot per day, with the median (yellow X), the mean (red circle), the group size, and a Kruskal-Wallis result in the title.
 
-clean_trimmed_features_all_days_trimmed_trimmed_features.txt
+![Violin plot example](./files/violin_counts_RelateLysoCell_D9.png)
 
-cell_ID_pooled_median_row_plate_standardization.txt
+*Example output: lysosome counts per cell on day 9. Concentration 11 is the control and 2 is the highest exposure, so dose increases to the left.*
 
-any subset
+Input files: any aggregated + standardized file, for example
 
-Modify file **violin_plots_per_feature.py**:
+`standardization/results/cell_ID_pooled_median_row_plate_standardization_cid.txt` — every feature, before feature selection
 
-    file_path = '/PATH/TO/feature_selection/results/trimmed_2/clean_trimmed_features_all_days_trimmed_trimmed_features_cid.txt'
+`feature_selection/results/trimmed_2/clean_trimmed_features_all_days_trimmed_trimmed_features_cid.txt` — only the features that survived selection
+
+or any subset.
+
+Activate environment:
+`conda activate utility_tools`
+
+**config.ini** setup:
+
+    [violin_plots]
+    base_path = /PATH/TO/
+    input_file = feature_selection/results/trimmed_2/clean_trimmed_features_all_days_trimmed_trimmed_features_cid.txt
+    output_dir = violin_plots/results
+
+    # Columns that are metadata or object counts rather than plotted features. cell_ID
+    # belongs here whenever the input is a _cid file - without it the cell identifier is
+    # plotted as though it were a measurement.
+    exclude_columns = Concentration,counts_Cells,counts_Cytoplasm,counts_FilteredNuclei,Metadata_Well,Metadata_Day,Metadata_Biorep,Tech_replica,Day_Well_BR,cell_ID
+
+    # Worker processes; one feature is plotted per worker. Lower this on a shared machine.
+    num_processes = 20
+
+Run:
+`python violin_plots_per_feature.py`
+
+One directory per feature under **output_dir**, each holding one PNG per day. Point **input_file** at a different table and rerun to cover the other stage; nothing else needs to change.

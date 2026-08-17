@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy.stats import kruskal
 import os
+import configparser
 from multiprocessing import Pool
 
 def replace_inf_and_large_values(df, max_value=1e12):
@@ -123,29 +124,34 @@ def plot_column(col, df_path, plots_dir):
         plt.close()
 
 if __name__ == "__main__":
-    file_path = '/PATH/TO/feature_selection/results/trimmed_2/clean_trimmed_features_all_days_trimmed_trimmed_features_cid.txt'
-    plots_dir = '/PATH/TO/violin_plots/results'
+    # Load configuration
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+
+    # Get paths from config
+    base_path = config['violin_plots']['base_path']
+    file_path = os.path.join(base_path, config['violin_plots']['input_file'])
+    plots_dir = os.path.join(base_path, config['violin_plots']['output_dir'])
+
+    # Columns to exclude (metadata and count columns)
+    exclude_cols = [c.strip() for c in config['violin_plots']['exclude_columns'].split(',') if c.strip()]
+    num_processes = config.getint('violin_plots', 'num_processes')
+
     os.makedirs(plots_dir, exist_ok=True)
-    
+
     # Read the file to get column names
     df = pd.read_csv(file_path, sep='\t')
-    
-    # Define columns to exclude (metadata and count columns)
-    exclude_cols = [
-        'Concentration', 'counts_Cells', 'counts_Cytoplasm', 'counts_FilteredNuclei', 
-        'Metadata_Well', 'Metadata_Day', 'Metadata_Biorep', 'Tech_replica', 'Day_Well_BR', 'cell_ID'
-    ]
-    
+
     # Get feature columns (everything except excluded columns)
     feature_columns = [col for col in df.columns if col not in exclude_cols]
-    
+
+    print(f"Reading {file_path}")
     print(f"Found {len(feature_columns)} feature columns to plot")
     print(f"Available days: {sorted(df['Metadata_Day'].unique())}")
     print(f"Available concentrations: {sorted(df['Concentration'].unique())}")
-    
+
     # Use multiprocessing to plot columns in parallel
-    num_processes = 20
     with Pool(num_processes) as pool:
         pool.starmap(plot_column, [(col, file_path, plots_dir) for col in feature_columns])
-    
+
     print(f"Plotting complete. Results saved in {plots_dir}")
