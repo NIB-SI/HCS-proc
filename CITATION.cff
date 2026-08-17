@@ -111,8 +111,21 @@ preferred-citation:
     name: American Chemical Society
   issn: 0013-936X
   year: 2026
+  month: 8
+  volume: 60
+  issue: 31
+  start: 21402
+  end: 21416
   doi: 10.1021/acs.est.5c18316
   url: 'https://doi.org/10.1021/acs.est.5c18316'
+  license: CC-BY-4.0
+  identifiers:
+    - type: other
+      value: 'PMID:42579109'
+      description: PubMed identifier
+    - type: other
+      value: 'PMC13472083'
+      description: PubMed Central identifier (open-access full text)
 references:
   - type: data
     title: >-

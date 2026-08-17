@@ -8,7 +8,7 @@ This set of scripts was used for:
 
 > Tome, M.; Jozef, B.; Mosimann, S. L.; Kosnik, M.; Schirmer, K.; Županič, A.
 > **A High-Content Imaging Pipeline to Investigate Subcytotoxic Effects in RTgill-W1 Cells.**
-> *Environmental Science & Technology*, 2026.
+> *Environmental Science & Technology* **2026**, *60* (31), 21402–21416.
 > [https://doi.org/10.1021/acs.est.5c18316](https://doi.org/10.1021/acs.est.5c18316)
 >
 > M.T. and B.J. contributed equally to this work.

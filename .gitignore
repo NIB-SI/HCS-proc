@@ -212,3 +212,8 @@ CLAUDE_template.md
 PROJECT.md
 proof.pdf
 .log/
+
+# Staging area for server-side scripts/figures awaiting integration, and the
+# holding pen for superseded material. Both are local-only and can be large.
+new_scripts_to_integrate_or_update/
+archive/
