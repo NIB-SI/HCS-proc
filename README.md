@@ -382,6 +382,82 @@ Run:
 
 Same as previous step, uses lists we created with **parsing_clusters.py** and trims + filters the standardized data → saved into subsets by FS based on days
 
+# FEATURE CATEGORIZATION
+
+folder for scripts: /PATH/TO/categorization/scripts
+
+Summarizes which kinds of measurement, on which organelle, survived feature selection.
+
+**config.ini** setup:
+
+    [categorization]
+    base_path = /PATH/TO/
+    # Input for build_feature_categories.py - any pooled/standardized table; only its
+    # header row is read, to get the full feature list before feature selection
+    all_features_file = main/results/cell_ID_pooled_median_row_plate_standardization.txt
+    # Input for count_feature_types.py - the feature list left after feature selection
+    final_features_file = feature_selection/results/trimmed_2/clean_trimmed_features_D1_D5_D7_D9_trimmed_trimmed_features.txt
+    # Output directory for types.txt and the barplots
+    output_dir = categorization/results
+
+    # Universal feature -> category/organelle lookup. Ships with the repo, next to this
+    # file, and is read relative to the script directory rather than base_path.
+    feature_categories_file = feature_categories.tsv
+
+    # Header columns of the pooled table that are not measured features
+    metadata_columns = Concentration,Metadata_Well,Metadata_Day,Metadata_Biorep,Tech_replica,Day_Well_BR,cell_ID
+
+    # Table layout - display order of the plotted columns and rows
+    category_columns = Counts,AreaShape,Granularity,Intensity,Radial Distribution,Texture,Other/Correlation
+    organelle_rows = Nuclei (Hoecst),Lysosomes (Quinacrine),Mitochondria (TMRM),Other
+
+    # How the values recorded in feature_categories.tsv map onto those columns and rows.
+    # Number holds rp_norm_Number_Object_Number_* object counts, grouped with Counts;
+    # Correlation holds the colocalization measures, which span two channels.
+    category_labels = Counts:Counts,Number:Counts,AreaShape:AreaShape,Granularity:Granularity,Intensity:Intensity,RadialDistribution:Radial Distribution,Texture:Texture,Correlation:Other/Correlation
+    organelle_labels = Nuclei:Nuclei (Hoecst),Lysosomes:Lysosomes (Quinacrine),Mitochondria:Mitochondria (TMRM),Other:Other
+
+    # Bar colours per category column, in the order above (ColorBrewer PuOr, colourblind-safe)
+    colors = #d8daeb,#b2abd2,#b35806,#fdb863,#e08214,#8073ac,#fee0b6
+
+## THE FEATURE CATEGORIZATION TABLE
+
+**feature_categories.tsv** ships with the repository, next to the scripts. It is the
+universal lookup: one row per CellProfiler feature, giving the measurement category and
+the organelle that feature describes. It covers the whole feature set as measured, not
+just the selected ones, so the same file serves any experiment run through this pipeline.
+
+Activate environment:
+`conda activate utility_tools`
+
+OPTIONAL — only when a new experiment measures features that are not in the table yet:
+
+Run:
+`python build_feature_categories.py`
+
+Reads the header of **all_features_file**, keeps every assignment already in the table,
+and appends the features it has not seen. Category comes from the measurement module in
+the name; organelle comes from the stain channel (`GrayLys`, `GrayMito`, `GrayNuclei`)
+when there is one, and from the measured object (`RelateLysoCell`, `RelateMitoCell`,
+`FilteredNuclei`, `Cells`, `Cytoplasm`) otherwise. Anything it cannot resolve is left
+blank and printed, to be filled in by hand. Existing rows are never overwritten, so
+corrections are safe across reruns.
+
+## COUNTING AND PLOTTING THE CATEGORIES
+
+Run:
+`python count_feature_types.py`
+
+Looks the selected features up in **feature_categories.tsv** and writes the organelle ×
+measurement-type cross-tab to `types.txt` in **output_dir**. Any selected feature that is
+missing from the table, or that has no assignment yet, is reported by name rather than
+silently dropped.
+
+Run:
+`python plot_types.py`
+
+Stacked barplots of that table, horizontal and vertical, at 300 dpi.
+
 # DIMENSIONALITY REDUCTION
 
 ## MAKING SUBSETS
