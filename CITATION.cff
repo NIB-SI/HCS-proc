@@ -14,36 +14,6 @@ authors:
     affiliation: >-
       Department of Biotechnology and Systems Biology, National
       Institute of Biology, Ljubljana, 1000, Slovenia
-  - given-names: Barbara
-    family-names: Jozef
-    orcid: 'https://orcid.org/0000-0001-7311-4373'
-    affiliation: >-
-      Environmental Toxicology, Eawag, Dübendorf, 8600, Switzerland
-  - given-names: Sven Lukas
-    family-names: Mosimann
-    orcid: 'https://orcid.org/0009-0001-9192-967X'
-    affiliation: >-
-      Environmental Toxicology, Eawag, Dübendorf, 8600, Switzerland;
-      Institute of Biogeochemistry and Pollutant Dynamics, ETHZ,
-      Zürich, 8092, Switzerland
-  - given-names: Marissa
-    family-names: Kosnik
-    orcid: 'https://orcid.org/0000-0002-2609-5816'
-    affiliation: >-
-      Environmental Toxicology, Eawag, Dübendorf, 8600, Switzerland
-  - given-names: Kristin
-    family-names: Schirmer
-    orcid: 'https://orcid.org/0000-0003-1116-4724'
-    affiliation: >-
-      Environmental Toxicology, Eawag, Dübendorf, 8600, Switzerland;
-      Institute of Biogeochemistry and Pollutant Dynamics, ETHZ,
-      Zürich, 8092, Switzerland
-  - given-names: Anže
-    family-names: Županič
-    orcid: 'https://orcid.org/0000-0003-3303-9086'
-    affiliation: >-
-      Department of Biotechnology and Systems Biology, National
-      Institute of Biology, Ljubljana, 1000, Slovenia
 contact:
   - given-names: Miha
     family-names: Tome
@@ -127,6 +97,25 @@ preferred-citation:
       value: 'PMC13472083'
       description: PubMed Central identifier (open-access full text)
 references:
+  - type: software
+    title: 'NIB-SI/HCS-proc'
+    notes: >-
+      Concept DOI for the code archive; always resolves to the newest
+      release. Release v1 (10.5281/zenodo.17949848) is the exact code
+      used for the article.
+    authors:
+      - given-names: Miha
+        family-names: Tome
+        orcid: 'https://orcid.org/0000-0001-7729-7381'
+        affiliation: >-
+          Department of Biotechnology and Systems Biology, National
+          Institute of Biology, Ljubljana, 1000, Slovenia
+    year: 2025
+    doi: 10.5281/zenodo.17949847
+    url: 'https://doi.org/10.5281/zenodo.17949847'
+    license: MIT
+    publisher:
+      name: Zenodo
   - type: data
     title: >-
       A high-content imaging pipeline to investigate subcytotoxic

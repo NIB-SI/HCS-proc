@@ -17,6 +17,17 @@ If you use this pipeline, please cite the article above. A `CITATION.cff` file i
 included, so GitHub's *Cite this repository* button gives the same reference in BibTeX
 or APA form.
 
+To cite the code itself:
+
+> Tome, M. **NIB-SI/HCS-proc.** *Zenodo*.
+> [https://doi.org/10.5281/zenodo.17949847](https://doi.org/10.5281/zenodo.17949847)
+
+That is the concept DOI and always resolves to the newest release. Release
+[`v1`](https://github.com/NIB-SI/HCS-proc/releases/tag/v1) —
+[10.5281/zenodo.17949848](https://doi.org/10.5281/zenodo.17949848) — is the exact code
+used for the article; `main` carries the maintained pipeline, which has since been
+corrected and extended.
+
 ## Data
 
 Raw microscopy images, CellProfiler-extracted features, pipeline files and processed
