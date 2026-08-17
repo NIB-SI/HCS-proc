@@ -1,4 +1,5 @@
 import os
+import collections
 import pandas as pd
 import configparser
 
@@ -49,9 +50,18 @@ def guess_organelle(feature, category):
     return ''
 
 
-# Step 2: Read the full feature list from the header of a pooled/standardized table
-features = pd.read_csv(all_features_file, sep='\t', nrows=0).columns
-features = sorted(f for f in features if f not in metadata_columns)
+# Step 2: Read the full feature list from the header of a pooled/standardized table.
+# Read the header line directly rather than through pandas, which silently renames
+# duplicated columns ('x' and 'x.1') and would add the renamed one as a new feature.
+with open(all_features_file) as fh:
+    header = [c.strip() for c in fh.readline().rstrip('\n').split('\t')]
+
+duplicated = sorted({c for c, n in collections.Counter(header).items() if c and n > 1})
+if duplicated:
+    print(f"WARNING: {len(duplicated)} column name(s) appear more than once in the header "
+          f"and were read once each: {', '.join(duplicated)}")
+
+features = sorted({c for c in header if c and c not in metadata_columns})
 print(f"Read {len(features)} features from {all_features_file}")
 
 # Step 3: Keep every assignment already in the table - it may have been corrected by

@@ -30,43 +30,52 @@ categories = pd.read_csv(categories_file, sep='\t', comment='#', dtype=str).fill
 lookup = {r.feature: (r.category, r.organelle) for r in categories.itertuples()}
 print(f"{len(selected)} selected features, {len(lookup)} in {categories_file}")
 
-# Step 2: Look every selected feature up, reporting anything the table cannot resolve
+# Step 2: Look every selected feature up. Anything that cannot be placed is collected
+# with the reason, so a gap in the lookup is never mistaken for a genuine zero.
 counts = pd.DataFrame(0, index=organelle_rows, columns=category_columns)
-unknown, undecided = [], []
+unplaced = []
 
 for feature in selected:
     if feature not in lookup:
-        unknown.append(feature)
+        unplaced.append((feature, f"not in {os.path.basename(categories_file)}"))
         continue
     category, organelle = lookup[feature]
     column = category_labels.get(category)
     row = organelle_labels.get(organelle)
-    if not column or not row:
-        undecided.append(feature)
+    reasons = []
+    if not category:
+        reasons.append("category blank")
+    elif not column:
+        reasons.append(f"category '{category}' is not in category_labels")
+    if not organelle:
+        reasons.append("organelle blank")
+    elif not row:
+        reasons.append(f"organelle '{organelle}' is not in organelle_labels")
+    if reasons:
+        unplaced.append((feature, "; ".join(reasons)))
         continue
     counts.at[row, column] += 1
 
-if unknown:
-    print(f"\n{len(unknown)} feature(s) missing from {categories_file} - add them with "
-          f"build_feature_categories.py, then fill in the assignment:")
-    for feature in unknown:
-        print(f"  {feature}")
-if undecided:
-    print(f"\n{len(undecided)} feature(s) have no category or organelle assigned yet:")
-    for feature in undecided:
-        print(f"  {feature}")
-
-counted = int(counts.values.sum())
-if counted != len(selected):
-    print(f"\nWARNING: {counted} of {len(selected)} selected features were counted.")
-
 # Step 3: Save the cross-tab. Zeros are written as blanks so the table reads the way it
 # is plotted - an absent combination is not a measured zero
+counted = int(counts.values.sum())
 output_file = os.path.join(output_dir, 'types.txt')
-counts.replace(0, '').to_csv(output_file, sep='\t')
+counts.astype(object).where(counts != 0, '').to_csv(output_file, sep='\t')
 
 print(f"\nFeature counts ({counted} features):")
 print(counts.to_string())
 print("\nCounts per category:")
 print(counts.sum(axis=0).to_string())
 print(f"\nCategorization table saved to {output_file}")
+
+# Step 4: Report the gaps last, so they are the final thing on screen
+if unplaced:
+    print(f"\n{'=' * 70}")
+    print(f"ACTION NEEDED: {len(unplaced)} of {len(selected)} selected features were not "
+          f"counted.\nFix them in {categories_file} - run build_feature_categories.py to "
+          f"append\nany that are missing, then fill in the blanks by hand.")
+    print('=' * 70)
+    for feature, reason in unplaced:
+        print(f"  {feature}\n      {reason}")
+else:
+    print(f"\nAll {len(selected)} selected features were categorized.")
