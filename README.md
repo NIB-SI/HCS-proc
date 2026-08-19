@@ -260,6 +260,16 @@ Trimming the standardized data, upper and lower 2.5% removed (on well level).
 
 # FEATURE SELECTION
 
+> **Also available as a standalone tool.** The concentration–response feature selection
+> described in this section — EMD scores, multi-model DRC fitting, the retention rule and
+> the correlation pruning — has been generalised into
+> [**NIB-SI/cdr_FS**](https://github.com/NIB-SI/cdr_FS), a pip-installable,
+> configuration-driven package that does not assume the RTgill-W1 experimental design.
+> Its defaults reproduce the run described below.
+>
+> The scripts in this repository remain the record of what was actually run for the
+> article; use them to reproduce it, and `cdr_FS` to apply the method to another dataset.
+
 folder for scripts: /PATH/TO/feature_selection/scripts
 
 **config.ini** setup:
