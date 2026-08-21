@@ -265,7 +265,8 @@ Trimming the standardized data, upper and lower 2.5% removed (on well level).
 > the correlation pruning — has been generalised into
 > [**NIB-SI/cdr_FS**](https://github.com/NIB-SI/cdr_FS), a pip-installable,
 > configuration-driven package that does not assume the RTgill-W1 experimental design.
-> Its defaults reproduce the run described below.
+> Its defaults reproduce the run described below. It is archived and citable in its own
+> right at <https://doi.org/10.5281/zenodo.22047439> (concept DOI, newest release).
 >
 > The scripts in this repository remain the record of what was actually run for the
 > article; use them to reproduce it, and `cdr_FS` to apply the method to another dataset.
