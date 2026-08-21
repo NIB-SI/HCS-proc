@@ -263,7 +263,7 @@ Trimming the standardized data, upper and lower 2.5% removed (on well level).
 > **Also available as a standalone tool.** The concentration–response feature selection
 > described in this section — EMD scores, multi-model DRC fitting, the retention rule and
 > the correlation pruning — has been generalised into
-> [**NIB-SI/cdr_FS**](https://github.com/NIB-SI/cdr_FS), a pip-installable,
+> [**NIB-SI/cdr_FS**](https://github.com/NIB-SI/cdr_FS), an installable,
 > configuration-driven package that does not assume the RTgill-W1 experimental design.
 > Its defaults reproduce the run described below. It is archived and citable in its own
 > right at <https://doi.org/10.5281/zenodo.22047439> (concept DOI, newest release).
