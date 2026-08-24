@@ -25,8 +25,9 @@ To cite the code itself:
 That is the concept DOI and always resolves to the newest release. Release
 [`v1`](https://github.com/NIB-SI/HCS-proc/releases/tag/v1) —
 [10.5281/zenodo.17949848](https://doi.org/10.5281/zenodo.17949848) — is the exact code
-used for the article; `main` carries the maintained pipeline, which has since been
-corrected and extended.
+used for the article. Release
+[`v2`](https://github.com/NIB-SI/HCS-proc/releases/tag/v2) is the maintained pipeline,
+corrected and extended since; its release notes say what changed.
 
 ## Data
 

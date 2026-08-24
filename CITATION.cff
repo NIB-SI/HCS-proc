@@ -6,6 +6,24 @@ message: >-
   If you use this software, please cite both the software and the
   article listed under preferred-citation.
 type: software
+abstract: >-
+  HCS-proc is the image analysis and data processing pipeline behind a
+  high-content screen of RTgill-W1 fish gill cells exposed to
+  Tebuthiuron, published in Tome et al. 2026. It runs from raw
+  microscopy images to the reduced feature space the article's
+  conclusions rest on: image-level quality control by
+  CellProfiler-Analyst classifiers under Nextflow, CellProfiler
+  feature extraction and per-cell pooling, row and plate
+  standardization with percentile trimming, concentration-response
+  feature selection by earth mover's distance (EMD) and multi-model
+  curve fitting, feature categorization, and dimensionality reduction
+  by UMAP alongside MMD, EMD and Mahalanobis distance measures. Each
+  step is a script driven by an .ini configuration file, and the
+  README documents the sequence they must run in. Release v1
+  (10.5281/zenodo.17949848) is the exact code used for the article;
+  later releases carry corrections and extensions. The
+  concentration-response feature selection has since been generalised
+  into the standalone tool cdr_FS (10.5281/zenodo.22047439).
 authors:
   - given-names: Miha
     family-names: Tome
@@ -21,6 +39,19 @@ contact:
     email: miha.tome@nib.si
 repository-code: 'https://github.com/NIB-SI/HCS-proc'
 license: MIT
+version: v2
+date-released: '2026-08-21'
+doi: 10.5281/zenodo.17949847
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.17949847
+    description: >-
+      Concept DOI for the code archive; always resolves to the newest
+      release. This is the DOI to cite.
+  - type: doi
+    value: 10.5281/zenodo.17949848
+    description: >-
+      Version DOI for release v1, the exact code used for the article.
 keywords:
   - high-content screening
   - high-content imaging
@@ -98,11 +129,13 @@ preferred-citation:
       description: PubMed Central identifier (open-access full text)
 references:
   - type: software
-    title: 'NIB-SI/HCS-proc'
+    title: >-
+      cdr_FS: concentration/dose-response model fitting for feature
+      selection in high-content screening
     notes: >-
-      Concept DOI for the code archive; always resolves to the newest
-      release. Release v1 (10.5281/zenodo.17949848) is the exact code
-      used for the article.
+      The concentration-response feature selection of this pipeline,
+      extracted into an installable, configuration-driven tool. Concept
+      DOI; release v1.0.0 is 10.5281/zenodo.22047440.
     authors:
       - given-names: Miha
         family-names: Tome
@@ -110,9 +143,9 @@ references:
         affiliation: >-
           Department of Biotechnology and Systems Biology, National
           Institute of Biology, Ljubljana, 1000, Slovenia
-    year: 2025
-    doi: 10.5281/zenodo.17949847
-    url: 'https://doi.org/10.5281/zenodo.17949847'
+    year: 2026
+    doi: 10.5281/zenodo.22047439
+    url: 'https://doi.org/10.5281/zenodo.22047439'
     license: MIT
     publisher:
       name: Zenodo
