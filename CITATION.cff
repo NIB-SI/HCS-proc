@@ -40,7 +40,7 @@ contact:
 repository-code: 'https://github.com/NIB-SI/HCS-proc'
 license: MIT
 version: v2
-date-released: '2026-08-21'
+date-released: '2026-08-24'
 doi: 10.5281/zenodo.17949847
 identifiers:
   - type: doi
@@ -52,6 +52,9 @@ identifiers:
     value: 10.5281/zenodo.17949848
     description: >-
       Version DOI for release v1, the exact code used for the article.
+  - type: doi
+    value: 10.5281/zenodo.22077446
+    description: Version DOI for release v2.
 keywords:
   - high-content screening
   - high-content imaging
